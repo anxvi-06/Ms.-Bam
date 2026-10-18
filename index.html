@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ms. Bam ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #f7c6da;
+  --light: #fff4f8;
+  --rose: #bd6489;
+  --dark: #80465f;
+  --white: #fffdfd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: var(--light);
+  color: var(--dark);
+  font-family: "DM Sans", sans-serif;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.floating {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp linear forwards;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: .65; }
+  85% { opacity: .65; }
+  100% {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+/* PAGE SYSTEM */
+
+.page {
+  position: absolute;
+  inset: 0;
+  height: 100dvh;
+  padding: 75px 22px 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 10% 15%, #ffe0ed 0%, transparent 38%),
+    radial-gradient(circle at 90% 85%, #fbd2e3 0%, transparent 40%),
+    #fff7fa;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(50px) scale(.98);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.2,.7,.2,1),
+    visibility .65s;
+}
+
+.page.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) scale(1);
+  z-index: 2;
+}
+
+.page.exit-left {
+  transform: translateX(-50px) scale(.98);
+}
+
+.page.reverse {
+  transform: translateX(-50px) scale(.98);
+}
+
+.content {
+  width: min(100%, 650px);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+}
+
+.bow {
+  font-size: 45px;
+  margin-bottom: 15px;
+  animation: bowBounce 3s ease-in-out infinite;
+}
+
+@keyframes bowBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-9px) rotate(5deg); }
+}
+
+.script {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(50px, 10vw, 82px);
+  font-weight: 400;
+  color: var(--rose);
+  line-height: 1.25;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  color: var(--rose);
+  font-size: clamp(28px, 6vw, 43px);
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.9;
+  margin: 20px auto;
+  max-width: 460px;
+}
+
+.small-label {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: #b9849b;
+  margin-bottom: 20px;
+}
+
+.pink-btn {
+  display: inline-block;
+  border: 1px solid #e8a4bf;
+  background: #edb0ca;
+  color: #74364f;
+  border-radius: 50px;
+  padding: 14px 30px;
+  font-size: 13px;
+  letter-spacing: .5px;
+  margin-top: 25px;
+  box-shadow: 0 8px 25px #df9ab52e;
+  transition: transform .3s, background .3s, box-shadow .3s;
+}
+
+.pink-btn:hover {
+  transform: translateY(-4px);
+  background: #f4c5d8;
+  box-shadow: 0 12px 30px #df9ab550;
+}
+
+.pink-btn:focus-visible,
+.nav-btn:focus-visible,
+.envelope:focus-visible {
+  outline: 3px solid var(--rose);
+  outline-offset: 5px;
+}
+
+.corner {
+  position: absolute;
+  font-size: 30px;
+  opacity: .6;
+  pointer-events: none;
+}
+
+.top-left { top: 25px; left: 25px; }
+.top-right { top: 25px; right: 25px; }
+.bottom-left { bottom: 25px; left: 25px; }
+.bottom-right { bottom: 25px; right: 25px; }
+
+/* PAGE ONE */
+
+.welcome-heart {
+  font-size: 25px;
+  margin: 20px;
+  color: #d48ba9;
+}
+
+.welcome-note {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #ad7991;
+}
+
+/* PAGE TWO: ENVELOPE */
+
+.envelope-area {
+  margin: 25px auto 15px;
+  perspective: 1000px;
+  width: 290px;
+  max-width: 100%;
+}
+
+.envelope {
+  position: relative;
+  display: block;
+  width: 290px;
+  max-width: 100%;
+  height: 190px;
+  margin: auto;
+  background: #f2a9c6;
+  border: none;
+  border-radius: 5px 5px 12px 12px;
+  box-shadow: 0 18px 35px #d889a650;
+  transition: transform .4s;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #e998b9;
+  clip-path: polygon(0 0, 50% 58%, 100% 0);
+  transform-origin: top;
+  transition: transform .7s;
+  z-index: 3;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f7bed4;
+  clip-path: polygon(0 100%, 50% 43%, 100% 100%);
+  z-index: 2;
+  border-radius: 0 0 12px 12px;
+}
+
+.envelope-heart {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  z-index: 4;
+  transition: opacity .3s;
+}
+
+.envelope.open .envelope-heart {
+  opacity: 0;
+}
+
+.letter {
+  display: none;
+  background: #fffdfd;
+  border: 1px solid #f1d3df;
+  padding: 30px 26px;
+  margin: 25px auto 0;
+  max-width: 540px;
+  border-radius: 12px;
+  text-align: left;
+  line-height: 1.95;
+  font-size: 14px;
+  box-shadow: 0 15px 35px #d79eb02b;
+}
+
+.letter.show {
+  display: block;
+  animation: letterReveal .8s ease both;
+}
+
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.letter p {
+  margin-bottom: 16px;
+}
+
+.letter-signature {
+  font-family: "Great Vibes", cursive;
+  font-size: 32px;
+  color: var(--rose);
+  text-align: right;
+}
+
+/* PAGE THREE: POEM */
+
+.poem-card {
+  background: #fffdfdcc;
+  border: 1px solid #f1d2df;
+  border-radius: 18px;
+  padding: 35px 20px;
+  box-shadow: 0 15px 40px #d79eb026;
+  max-width: 540px;
+  margin: 20px auto;
+}
+
+.verse {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: clamp(13px, 3.2vw, 16px);
+  line-height: 1.9;
+  margin-bottom: 23px;
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.page.active .verse {
+  animation: verseReveal .8s ease forwards;
+}
+
+.page.active .verse:nth-child(1) { animation-delay: .3s; }
+.page.active .verse:nth-child(2) { animation-delay: .8s; }
+.page.active .verse:nth-child(3) { animation-delay: 1.3s; }
+.page.active .verse:nth-child(4) { animation-delay: 1.8s; }
+.page.active .verse:nth-child(5) { animation-delay: 2.3s; }
+
+@keyframes verseReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.poem-sign {
+  font-size: 12px;
+  color: #ad7991;
+  margin-top: 20px;
+}
+
+/* PAGE FOUR */
+
+.final-heart {
+  font-size: 65px;
+  display: inline-block;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.13); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.08); }
+}
+
+.surprise-message {
+  display: none;
+  margin: 30px auto;
+  max-width: 440px;
+  animation: letterReveal .9s ease both;
+}
+
+.surprise-message.show {
+  display: block;
+}
+
+.surprise-message p {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.9;
+}
+
+/* NAVIGATION */
+
+.navigation {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 20;
+  background: #fffafce8;
+  padding: 10px 18px;
+  border-radius: 40px;
+  border: 1px solid #f0d4df;
+  box-shadow: 0 5px 20px #c98ba521;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--rose);
+  font-size: 12px;
+  padding: 6px;
+}
+
+.nav-btn:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #e7c4d2;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+.dot.active {
+  width: 19px;
+  border-radius: 10px;
+  background: #c77a9c;
+}
+
+/* MOBILE */
+
+@media(max-width: 600px) {
+  .page {
+    padding: 55px 18px 90px;
+  }
+
+  .corner {
+    font-size: 21px;
+  }
+
+  .letter {
+    padding: 23px 18px;
+    font-size: 13px;
+  }
+
+  .poem-card {
+    padding: 25px 13px;
+  }
+
+  .bow {
+    font-size: 35px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  .verse {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="decorations" aria-hidden="true"></div>
+
+<!-- PAGE ONE: WELCOME -->
+<section class="page active" id="page1">
+  <span class="corner top-left">🎀</span>
+  <span class="corner top-right">♡</span>
+  <span class="corner bottom-left">✿</span>
+  <span class="corner bottom-right">🎀</span>
+
+  <div class="content">
+    <div class="bow">🎀</div>
+    <p class="small-label">A LITTLE CORNER OF THE INTERNET</p>
+
+    <h1 class="script">To My Dearest Ms. Bam</h1>
+
+    <div class="welcome-heart">♡</div>
+
+    <p class="subtitle">
+      For the teacher who left the classroom,
+      but never really left my heart.
+    </p>
+
+    <p class="welcome-note">
+      MADE WITH LOTS AND LOTS OF LOVE
+    </p>
+
+    <button class="pink-btn" onclick="goToPage(1)">
+      A little something for you ♡
+    </button>
+  </div>
+</section>
+
+<!-- PAGE TWO: LETTER -->
+<section class="page" id="page2">
+  <span class="corner top-left">♡</span>
+  <span class="corner top-right">🎀</span>
+
+  <div class="content">
+    <p class="small-label">SEALED WITH LOVE</p>
+    <h2>A Letter Just for You 💌</h2>
+
+    <p class="subtitle">
+      Some things are better written than said.
+    </p>
+
+    <div class="envelope-area">
+      <button class="envelope" id="envelope"
+        aria-label="Open your letter"
+        aria-expanded="false"
+        onclick="openLetter()">
+        <span class="envelope-heart">💗</span>
+      </button>
+    </div>
+
+    <p id="envelopeHint" style="font-size:12px;margin-top:18px;">
+      Tap the envelope to open ♡
+    </p>
+
+    <div class="letter" id="letter">
+      <p>My dearest Ms. Bam,</p>
+
+      <p>
+        I don't think you realise just how much
+        you're missed. It's funny how someone can
+        become such a special part of your days
+        without even knowing it.
+      </p>
+
+      <p>
+        You were never just another teacher to me.
+        There was something about your presence,
+        your smile, and the way you made ordinary
+        days feel a little brighter.
+      </p>
+
+      <p>
+        I know people move on to new chapters,
+        and I'm genuinely happy that you're
+        beginning yours. But a tiny selfish part
+        of me still wishes I could have just
+        one more class with you.
+      </p>
+
+      <p>
+        I hope you're smiling a lot, laughing
+        at the smallest things, and being
+        surrounded by all the kindness you deserve.
+      </p>
+
+      <p>
+        And please don't forget that somewhere,
+        there's a student who still thinks
+        you're the cutest, sweetest teacher ever.
+      </p>
+
+      <p>
+        Thank you for being you, Ms. Bam.
+        I miss you more than these little
+        words could ever explain.
+      </p>
+
+      <div class="letter-signature">
+        With love, Anavia ♡
+      </div>
+    </div>
+
+    <button class="pink-btn" onclick="goToPage(2)">
+      There's something else... ♡
+    </button>
+  </div>
+</section>
+
+<!-- PAGE THREE: POEM -->
+<section class="page" id="page3">
+  <span class="corner top-left">🎀</span>
+  <span class="corner top-right">✿</span>
+
+  <div class="content">
+    <p class="small-label">WORDS FROM THE HEART</p>
+    <h2>A Little Poem for You 🌷</h2>
+
+    <div class="poem-card">
+      <div class="verse">
+        Some people come and quietly stay,<br>
+        Even when life takes them away.<br>
+        Some leave a room, yet leave behind,<br>
+        A thousand little joys to find.
+      </div>
+
+      <div class="verse">
+        The days moved on, the seasons flew,<br>
+        But something stayed that felt like you.<br>
+        A gentle laugh, a familiar smile,<br>
+        That made the hardest days worthwhile.
+      </div>
+
+      <div class="verse">
+        And though the halls may feel the same,<br>
+        There's something missing, just your name.<br>
+        For some are remembered for what they do,<br>
+        But I'll remember how it felt with you.
+      </div>
+
+      <div class="verse">
+        So here's a thought, both small and true,<br>
+        Some days still feel a little less without you.
+      </div>
+
+      <div class="verse">
+        ♡
+      </div>
+
+      <p class="poem-sign">— Anavia Parveen</p>
+    </div>
+
+    <button class="pink-btn" onclick="goToPage(3)">
+      One last little thing 🎀
+    </button>
+  </div>
+</section>
+
+<!-- PAGE FOUR: FINAL SURPRISE -->
+<section class="page" id="page4">
+  <span class="corner top-left">✿</span>
+  <span class="corner top-right">🎀</span>
+  <span class="corner bottom-left">♡</span>
+  <span class="corner bottom-right">✿</span>
+
+  <div class="content">
+    <p class="small-label">BEFORE YOU GO</p>
+
+    <h2>Just One More Thing...</h2>
+
+    <div class="final-heart">💗</div>
+
+    <p class="subtitle">
+      I saved a little extra love for the end.
+    </p>
+
+    <button class="pink-btn" id="surpriseButton"
+      onclick="showSurprise()">
+      Click for a little surprise ♡
+    </button>
+
+    <div class="surprise-message" id="surpriseMessage">
+      <p>
+        Dear Ms. Bam,<br><br>
+        No matter where life takes you,
+        I hope you always find reasons to smile.
+        And whenever you wonder if you've made
+        a difference in someone's life,
+        I hope you remember this little website.
+        <br><br>
+        Because you made a difference in mine.
+        <br><br>
+        You'll always have a special place
+        in my heart.
+      </p>
+
+      <h2 class="script" style="margin-top:25px;">
+        Love you lots! ♡
+      </h2>
+
+      <p style="font-size:12px;color:#ad7991;">
+        Forever your student, Anavia 🎀
+      </p>
+
+      <button class="pink-btn" onclick="goToPage(0)">
+        Back to the beginning ♡
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="navigation" aria-label="Page navigation">
+  <button class="nav-btn" id="backBtn"
+    onclick="goToPage(currentPage-1)">
+    ← Back
+  </button>
+
+  <div class="dots" aria-hidden="true">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <button class="nav-btn" id="nextBtn"
+    onclick="goToPage(currentPage+1)">
+    Next →
+  </button>
+</nav>
+
+<script>
+const pages = document.querySelectorAll(".page");
+const dots = document.querySelectorAll(".dot");
+
+let currentPage = 0;
+let transitioning = false;
+
+function goToPage(index) {
+  if (
+    index < 0 ||
+    index >= pages.length ||
+    index === currentPage ||
+    transitioning
+  ) return;
+
+  transitioning = true;
+
+  const oldPage = pages[currentPage];
+  const newPage = pages[index];
+  const goingForward = index > currentPage;
+
+  oldPage.classList.remove("active", "reverse", "exit-left");
+  oldPage.classList.add(goingForward ? "exit-left" : "reverse");
+
+  newPage.classList.remove("reverse", "exit-left");
+
+  if (!goingForward) {
+    newPage.classList.add("reverse");
+  }
+
+  newPage.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      newPage.classList.add("active");
+      newPage.classList.remove("reverse");
+    });
+  });
+
+  currentPage = index;
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentPage);
+  });
+
+  document.getElementById("backBtn").disabled =
+    currentPage === 0;
+
+  document.getElementById("nextBtn").disabled =
+    currentPage === pages.length - 1;
+
+  setTimeout(() => {
+    oldPage.classList.remove("exit-left", "reverse");
+    transitioning = false;
+  }, 700);
+}
+
+// OPEN ENVELOPE
+
+let letterOpened = false;
+
+function openLetter() {
+  if (letterOpened) return;
+
+  letterOpened = true;
+
+  const envelope = document.getElementById("envelope");
+  envelope.classList.add("open");
+  envelope.setAttribute("aria-expanded", "true");
+
+  document.getElementById("envelopeHint").textContent =
+    "A little piece of my heart, written for you ♡";
+
+  setTimeout(() => {
+    document.getElementById("letter").classList.add("show");
+  }, 650);
+}
+
+// FLOATING DECORATIONS
+
+const decorationContainer =
+  document.getElementById("decorations");
+
+const symbols = ["♡", "✿", "♡", "✧", "🎀"];
+
+function createFloatingDecoration() {
+  if (document.hidden ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const item = document.createElement("span");
+  item.className = "floating";
+  item.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  item.style.left = Math.random() * 100 + "%";
+  item.style.fontSize = (12 + Math.random() * 15) + "px";
+  item.style.color = "#d98cad";
+  item.style.animationDuration =
+    (7 + Math.random() * 5) + "s";
+
+  decorationContainer.appendChild(item);
+
+  item.addEventListener("animationend", () => item.remove());
+}
+
+setInterval(createFloatingDecoration, 1000);
+
+// FINAL SURPRISE
+
+let surpriseOpened = false;
+
+function showSurprise() {
+  if (surpriseOpened) return;
+
+  surpriseOpened = true;
+
+  document.getElementById("surpriseMessage")
+    .classList.add("show");
+
+  document.getElementById("surpriseButton")
+    .style.display = "none";
+
+  createHeartShower();
+}
+
+function createHeartShower() {
+  const reducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reducedMotion) return;
+
+  for (let i = 0; i < 45; i++) {
+    setTimeout(() => {
+      const heart = document.createElement("span");
+      heart.className = "floating";
+      heart.textContent = ["💗", "💕", "♡", "🎀"][i % 4];
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize =
+        (15 + Math.random() * 18) + "px";
+      heart.style.animationDuration =
+        (4 + Math.random() * 3) + "s";
+
+      decorationContainer.appendChild(heart);
+      heart.addEventListener("animationend", () => heart.remove());
+    }, i * 65);
+  }
+}
+
+// INITIAL BUTTON STATE
+
+document.getElementById("backBtn").disabled = true;
+
+// KEYBOARD NAVIGATION
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    goToPage(currentPage + 1);
+  }
+
+  if (event.key === "ArrowLeft") {
+    goToPage(currentPage - 1);
+  }
+});
+</script>
+
+</body>
+</html>
